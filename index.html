@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Make it compatible with mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to Alshami's Group prediction</title>
+    <style>
+        body {
+            background: #600;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        .login {
+            text-align: center;
+            padding: 20px;
+            background: rgba(10, 10, 10, 1); /* Add some transparency to the background */
+            border-radius: 50px;
+            margin: 50px auto;
+            width: 80%;
+            max-width: 800px; /* Adjust the width as needed */
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-between; /* Space between columns */
+        }
+
+        .column {
+            width: 45%; /* Adjust the width of each column */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: violet;
+            color: black;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px; /* Adjust spacing between input fields and button */
+        }
+
+        h4 {
+            color: violet;
+        }
+
+        img {
+            width: 85%; /* Make sure the image takes the full width of its container */
+            border-radius: 10px; /* Optional: Add some rounded corners to the image */
+            position: absolute;
+            right: 100px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="login">
+        <div class="column">
+            <h1 style="color:Violet; font-size: 42px;">
+                Welcome to Alshami's Group Scale Prediction Web Page!
+            </h1>
+
+            <p style="font-size: 22px;">
+                Our web page offers a sophisticated solution for predicting scale formation potential based on the input of various ion concentrations. Our model generates predictions for the Scaling Index (SI) as the output.
+            </p>
+
+            <p style="font-size: 22px;">
+                To enhance your experience, our prediction model utilizes two powerful algorithms: Random Forest and XGBoost. You have the flexibility to choose your preferred model in the "Select Model" section, tailored to your specific needs.
+            </p>
+
+            <p style="font-size: 22px;">
+                **Please note that for accurate predictions, it is essential to input values for all ion measures. In cases where you lack data for certain ions, simply enter zero.
+            </p>
+            
+
+
+
+        </div>
+
+        <div class="column">
+            <form action="{{ url_for('predict')}}" method="post">
+                <label for="pH">pH:</label>
+                <input type="text" name="pH" placeholder="Enter pH" required="required"><br>
+
+                <label for="ICP_Al">ICP_Al:</label>
+                <input type="text" name="ICP_Al" placeholder="Enter ICP_Al" required="required"><br>
+
+                <label for="ICP_B">ICP_B:</label>
+                <input type="text" name="ICP_B" placeholder="Enter ICP_B" required="required"><br>
+
+                <label for="ICP_Ba">ICP_Ba:</label>
+                <input type="text" name="ICP_Ba" placeholder="Enter ICP_Ba" required="required"><br>
+                
+                <label for="ICP_HCO3">ICP_HCO3:</label>
+                <input type="text" name="ICP_HCO3" placeholder="Enter ICP_HCO3" required="required"><br>
+                
+                <label for="ICP_Ca">ICP_Ca:</label>
+                <input type="text" name="ICP_Ca" placeholder="Enter ICP_Ca" required="required"><br>
+                
+                <label for="ICP_Cl">ICP_Cl:</label>
+                <input type="text" name="ICP_Cl" placeholder="Enter ICP_Cl" required="required"><br>
+                
+                <label for="ICP_Cu">ICP_Cu:</label>
+                <input type="text" name="ICP_Cu" placeholder="Enter ICP_Cu" required="required"><br>
+                
+                <label for="ICP_Fe">ICP_Fe:</label>
+                <input type="text" name="ICP_Fe" placeholder="Enter ICP_Fe" required="required"><br>
+                
+                <label for="ICP_K">ICP_K:</label>
+                <input type="text" name="ICP_K" placeholder="Enter ICP_K" required="required"><br>
+                
+                <label for="ICP_Mg">ICP_Mg:</label>
+                <input type="text" name="ICP_Mg" placeholder="Enter ICP_Mg" required="required"><br>
+                
+                <label for="ICP_Mn">ICP_Mn:</label>
+                <input type="text" name="ICP_Mn" placeholder="Enter ICP_Mn" required="required"><br>
+                
+                <label for="ICP_Na">ICP_Na:</label>
+                <input type="text" name="ICP_Na" placeholder="Enter ICP_Na" required="required"><br>
+                
+                <label for="ICP_Pb">ICP_Pb:</label>
+                <input type="text" name="ICP_Pb" placeholder="Enter ICP_Pb" required="required"><br>
+                
+                <label for="ICP_S">ICP_S:</label>
+                <input type="text" name="ICP_S" placeholder="Enter ICP_S" required="required"><br>
+                
+                <label for="ICP_Sulfate">ICP_Sulfate:</label>
+                <input type="text" name="ICP_Sulfate" placeholder="Enter ICP_Sulfate" required="required"><br>
+                
+                <label for="ICP_Si">ICP_Si:</label>
+                <input type="text" name="ICP_Si" placeholder="Enter ICP_Si" required="required"><br>
+                
+                <label for="ICP_Sr">ICP_Sr:</label>
+                <input type="text" name="ICP_Sr" placeholder="Enter ICP_Sr" required="required"><br>
+                
+                <label for="ICP_Zn">ICP_Zn:</label>
+                <input type="text" name="ICP_Zn" placeholder="Enter ICP_Zn" required="required"><br>
+                
+                
+                
+                
+
+                <!-- Add other labels and input fields as needed -->
+
+                <label for="model">Select Model:</label>
+                <select id="model" name="model">
+                    <option value="RF">Random Forest</option>
+                    <option value="XG">XGBoost</option>
+                </select><br>
+
+                <button type="submit" class="btn btn-primary btn-block btn-large">Predict potential Scales</button>
+            </form>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <h4 style="color:Violet;">
+        {{ prediction_text }} </h4>
+    {% if bar_chart_image %}
+    <img src="data:image/png;base64,{{ bar_chart_image }}" alt="Bar Chart">
+    {% endif %}
+
+</body>
+
+</html>
